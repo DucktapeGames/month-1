@@ -1,0 +1,20 @@
+{
+    "dialogs": [
+        {
+            "id": 0,
+            "name": "",
+            "lines": [
+                {
+                    "id": 0,
+                    "image": "Arrow",
+                    "message": [
+                        "Hello!",
+                        "Nice to finally meet you mate.",
+                        "My name is <i><b>Lt. Arrow</b></i>.",
+                        "You may call me just <b>Arrow</b>."
+                    ]
+                }
+            ]
+        }
+    ]
+}
