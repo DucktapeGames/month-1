@@ -209,7 +209,7 @@ MonoBehaviour:
   uiImage: {fileID: 114254184457311454}
   moreTextIndicator: {fileID: 114145727276365412}
   dialog: []
-  textSpeed: 100
+  textSpeed: 200
   blinkSpeed: 2
   dialogCompleted:
     m_PersistentCalls:

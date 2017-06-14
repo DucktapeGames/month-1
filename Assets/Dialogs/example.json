@@ -13,6 +13,14 @@
                         "My name is <i><b>Lt. Arrow</b></i>.",
                         "You may call me just <b>Arrow</b>."
                     ]
+                },
+				 {
+                    "id": 1,
+                    "image": "Arrow",
+                    "message": [
+                        "I was just testing some dialog",
+                        "M8"
+                    ]
                 }
             ]
         }
