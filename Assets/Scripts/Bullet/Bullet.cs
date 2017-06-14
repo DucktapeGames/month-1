@@ -11,15 +11,15 @@ public class Bullet : MonoBehaviour, IPoolable{
 	[SerializeField][Range(0,10)]
 	public float LifeTime; 
 
-	void Awake(){
+	void Start(){
 		_deSpawnPosition = this.transform.position; 
 		//if mayor event happens despawn. you need an event or delegate. 
 	}
 		
-	public void Spawn(Vector3 position, Vector3 target){
+	public void Spawn(Vector3 position, Transform target){
 		_spawnPosition = position; 
 		this.transform.position = _spawnPosition; 
-		_target = target; 
+		_target = target.position; 
 		this.transform.rotation = Quaternion.LookRotation (_target - this.transform.position); 
 	}
 

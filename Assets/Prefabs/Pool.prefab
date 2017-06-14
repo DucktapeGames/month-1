@@ -93,5 +93,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletCount: 10
+  EnemyCount: 10
+  EnemyPrefab: {fileID: 114165918888761764, guid: a3325dc2c5d374e11b9c2692a9e1d667,
+    type: 2}
   BulletPrefab: {fileID: 114190082279033082, guid: 1412f1ea320434c9884ead11d66d6e39,
     type: 2}
