@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public interface IDamageable {
-    bool isEnemy();
-    int totalHp { get; set; }
-    int hp { get; set; }
+    bool IsEnemy();
+    int TotalHp { get; set; }
+    int Hp { get; set; }
     void Damage(int damage);
     void Kill();
 }
