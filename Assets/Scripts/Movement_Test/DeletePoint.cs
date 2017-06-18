@@ -8,7 +8,6 @@ public class DeletePoint : MonoBehaviour {
 
 
 	void OnTriggerEnter(Collider something){
-		Debug.Log ("Hey"); 
 		something.transform.position = new Vector3 (something.transform.position.x,something.transform.position.y, RespawnPoint.position.z); 
 	}
 }
