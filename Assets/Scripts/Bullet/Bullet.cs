@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour, IPoolable{
 	IEnumerator ShootTowardsPlayer(){
 		float Distance = 0; 
 		float LivedTime = 0; 
-		while(LivedTime <= LifeTime){
+		while(LivedTime <= LifeTime && this.transform.position != _target){
 			this.transform.position = Vector3.MoveTowards (_spawnPosition, _target,Distance + (Speed * Time.fixedDeltaTime )); 
 			Distance += (Speed * Time.fixedDeltaTime); 
 			LivedTime += Time.fixedDeltaTime; 
