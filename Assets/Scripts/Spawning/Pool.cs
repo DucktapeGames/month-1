@@ -42,9 +42,11 @@ public class Pool : MonoBehaviour {
 		Enemy eAux; 
 		for (int n = 1; n <= BulletCount; n++) {
 			aux = Instantiate (BulletPrefab, this.transform.position + (n * this.transform.right), Quaternion.identity, this.transform); 
+			bullets.Enqueue (aux);
+		}
+		for (int n = 1; n <= EnemyCount; n++) {
 			eAux = Instantiate (EnemyPrefab, this.transform.position + (n * 2* -this.transform.forward), Quaternion.identity, this.transform);
 			eAux.SetColor (new Color (Random.value, Random.value, Random.value)); 
-			bullets.Enqueue (aux);
 			enemies.Enqueue (eAux); 
 		}
 
