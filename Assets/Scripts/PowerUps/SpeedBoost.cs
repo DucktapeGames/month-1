@@ -84,7 +84,7 @@ public class SpeedBoost : PowerUp {
     }
    
     void DoPowerUp() {
-        if((Mathf.Round((dieAt - Time.time) * 10.0f) / 10.0f) < 1) {
+        if((Mathf.Round((dieAt - Time.time) * 10.0f) / 10.0f) < 0.2) {
             GetComponent<Movement>().Velocity = prevVelocity;
             GetComponent<Movement>().TurningVelocity = prevTurnVelocity;
             GetComponent<Movement>().TiltVelocity = prevTilt;

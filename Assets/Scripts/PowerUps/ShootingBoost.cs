@@ -71,7 +71,6 @@ public class ShootingBoost : PowerUp {
             po.uses = uses;
 
             // If it is the only PowerUp then it should be active
-            PowerUp[] pups = (PowerUp[])go.GetComponents<PowerUp>();
             po.Init();
 
             Destroy(gameObject);
