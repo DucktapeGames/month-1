@@ -5,7 +5,11 @@ using UnityEngine;
 public class SpeedBoost : PowerUp {
 	// Movement component is used to guarantee the powerup is in possesion of the player
 	// or to guarantee that the player will posses it
-	public string DisplayName = "Speed Boost";
+	public string displayName = "Speed Boost";
+    float prevVelocity;
+    float prevTurnVelocity;
+    float prevTilt;
+    float prevMultiplier;
    
     // Use this for initialization
     void Start() {
@@ -21,11 +25,20 @@ public class SpeedBoost : PowerUp {
     }
    
     public override void Init() {
-        toolTip = DisplayName;
+        toolTip = displayName;
         isPassive = true; // is a passive power up
         iconPosition = Vector2.right * 100;
+
        
         if(GetComponent<Movement>()) {
+            prevVelocity = GetComponent<Movement>().Velocity;
+            prevTurnVelocity = GetComponent<Movement>().TurningVelocity;
+            prevTilt = GetComponent<Movement>().TiltVelocity;
+            prevMultiplier = GetComponent<Movement>().Multiplier;
+            GetComponent<Movement>().Velocity = 400;
+            GetComponent<Movement>().TurningVelocity = 250;
+            GetComponent<Movement>().TiltVelocity = 20;
+            GetComponent<Movement>().Multiplier = 6;
             Destroy(this, passiveLifetime);
         	dieAt = Time.time + passiveLifetime;
         }
@@ -59,6 +72,7 @@ public class SpeedBoost : PowerUp {
             // Create the new PowerUp
             PowerUp po = go.AddComponent<SpeedBoost>();
             // Pass values to override the defaults in the new instance
+            po.iconPosition = iconPosition;
             po.icon = icon;
             po.passiveLifetime = passiveLifetime;
             //Debug.Log (po);
@@ -70,6 +84,11 @@ public class SpeedBoost : PowerUp {
     }
    
     void DoPowerUp() {
-        //Debug.Log("Powering up");
+        if((Mathf.Round((dieAt - Time.time) * 10.0f) / 10.0f) < 1) {
+            GetComponent<Movement>().Velocity = prevVelocity;
+            GetComponent<Movement>().TurningVelocity = prevTurnVelocity;
+            GetComponent<Movement>().TiltVelocity = prevTilt;
+            GetComponent<Movement>().Multiplier = prevMultiplier;
+        }
     }
 }

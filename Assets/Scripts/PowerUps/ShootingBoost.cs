@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShootingBoost : PowerUp {
 	// Health component is used to guarantee the powerup is in possesion of the player
 	// or to guarantee that the player will posses it
-	public string DisplayName = "Shooting Boost";
+	public string displayName = "Shooting Boost";
    
     // Use this for initialization
     void Start() {
@@ -22,7 +22,7 @@ public class ShootingBoost : PowerUp {
     }
    
     public override void Init() {
-        toolTip = DisplayName;
+        toolTip = displayName;
        
         if(GetComponent<Health>()) {
             // Make this the current active powerup
@@ -67,6 +67,7 @@ public class ShootingBoost : PowerUp {
             PowerUp po = go.AddComponent<ShootingBoost>();
             // Pass values to override the defaults in the new instance
             po.icon = icon;
+            po.iconPosition = iconPosition;
             po.uses = uses;
 
             // If it is the only PowerUp then it should be active
