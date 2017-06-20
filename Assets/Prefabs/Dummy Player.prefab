@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0c837e08c8248df96a984a7e6a4a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: 200
+  Slowness: 19.2
   TurningVelocity: 150
   TiltVelocity: 13.1
   Multiplier: 4.54
