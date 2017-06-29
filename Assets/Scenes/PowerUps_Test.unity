@@ -1799,10 +1799,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0c837e08c8248df96a984a7e6a4a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Velocity: 200
+  Slowness: 18
   TurningVelocity: 150
-  TiltVelocity: 13.1
-  Multiplier: 4.54
+  TiltVelocity: 30
+  Multiplier: 4.5
 --- !u!4 &1877634107
 Transform:
   m_ObjectHideFlags: 0

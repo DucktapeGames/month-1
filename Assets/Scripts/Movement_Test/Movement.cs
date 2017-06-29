@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour {
 
 	}
 
-	void FixedUpdate(){
+	void FixedUpdate() {
 		this.transform.position = position; 
 		if (Rotate && RotPositive ) {
 			if (Graphics.localRotation.z < 0.5f) {
@@ -73,7 +73,4 @@ public class Movement : MonoBehaviour {
 			Graphics.RotateAround (Graphics.position, Vector3.right, -TiltVelocity * Time.fixedDeltaTime); 
 		}
 	}
-
-
-
 }
