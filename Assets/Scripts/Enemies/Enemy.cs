@@ -16,13 +16,15 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 
 	private Vector3[] Path; 
 	private MeshRenderer _renderer;
-	private int _totalHp { get; set; }
-	private int _hp { get; set; }
+	private int _totalHp;
+	private int _hp;
 
 	void Start() {
 		_deSpawnPosition = this.transform.position; 
 		_barrel = this.transform.GetChild (2); 
-		_renderer = this.gameObject.GetComponentInChildren<MeshRenderer> (); 
+		_renderer = this.gameObject.GetComponentInChildren<MeshRenderer> ();
+		_totalHp = 100;
+		_hp = 100;
 	}
 
 	public void Spawn(Vector3 position, Transform target) {
