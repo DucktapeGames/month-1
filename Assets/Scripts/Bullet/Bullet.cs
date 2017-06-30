@@ -4,19 +4,23 @@ using UnityEngine;
 using ObjectPooling;
 
 public class Bullet : MonoBehaviour, IPoolable{
-	private Vector3 _spawnPosition, _target, _deSpawnPosition; 
+	private Vector3 _spawnPosition, _target, _deSpawnPosition;
+	private bool _enemyBullet = false;
+	private Renderer _renderer;
 	private Coroutine _current; 
 	[SerializeField][Range(0,100)]
 	public float Speed; 
 	[SerializeField][Range(0,10)]
-	public float LifeTime; 
+	public float LifeTime;
 
-	void Start(){
-		_deSpawnPosition = this.transform.position; 
+	void Start() {
+		_deSpawnPosition = this.transform.position;
 		//if mayor event happens despawn. you need an event or delegate. 
 	}
 		
-	public void Spawn(Vector3 position, Transform target){
+	public void Spawn(Vector3 position, Transform target) {
+		_enemyBullet = true;
+		SetColor(Color.red);
 		_spawnPosition = position; 
 		this.transform.position = _spawnPosition; 
 		_target = target.position; 
@@ -24,19 +28,21 @@ public class Bullet : MonoBehaviour, IPoolable{
 	}
 
 	public void Spawn2(Vector3 position, Vector3 target) {
+		_enemyBullet = false;
+		SetColor(Color.green);
 		_spawnPosition = position; 
 		this.transform.position = _spawnPosition; 
 		_target = target; 
 		this.transform.rotation = Quaternion.LookRotation (_target - this.transform.position); 
 	}
 
-	public void DeSpawn(){
+	public void DeSpawn() {
 		PauseFire (); 
 		_target = Vector3.zero;  
 		this.transform.position = _deSpawnPosition; 
 	}
 
-	public void Fire(){
+	public void Fire() {
 		_current = null; 
 		_current = StartCoroutine (ShootTowardsPlayer ()); 
 	}
@@ -56,14 +62,21 @@ public class Bullet : MonoBehaviour, IPoolable{
 			yield return new WaitForSeconds(Time.fixedDeltaTime); 
 		}
 		DeSpawn (); 
-		yield return null; 
+		yield return null;
+	}
+
+	public void SetColor(Color color) {
+		if (_renderer == null) {
+			_renderer = GetComponent<Renderer>(); 
+		}
+		_renderer.material.SetColor("_Color", color);
 	}
 
 	void OnTriggerEnter(Collider something) {
-		if(something.tag == "Player") {
+		if(something.tag == "Player" && _enemyBullet) {
 			DeSpawn(); 
 		}
-		if(something.tag == "Enemy") {
+		if(something.tag == "Enemy" && !_enemyBullet) {
 			something.gameObject.GetComponent<Enemy>().DeSpawn();
 			DeSpawn();
 		}
