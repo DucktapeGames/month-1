@@ -59,10 +59,13 @@ public class Bullet : MonoBehaviour, IPoolable{
 		yield return null; 
 	}
 
-	void OnTriggerEnter(Collider something){
-		if (something.tag == "Player") {
-			DeSpawn (); 
+	void OnTriggerEnter(Collider something) {
+		if(something.tag == "Player") {
+			DeSpawn(); 
+		}
+		if(something.tag == "Enemy") {
+			something.gameObject.GetComponent<Enemy>().DeSpawn();
+			DeSpawn();
 		}
 	}
-
 }
