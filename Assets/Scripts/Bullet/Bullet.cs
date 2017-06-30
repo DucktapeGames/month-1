@@ -23,6 +23,13 @@ public class Bullet : MonoBehaviour, IPoolable{
 		this.transform.rotation = Quaternion.LookRotation (_target - this.transform.position); 
 	}
 
+	public void Spawn2(Vector3 position, Vector3 target) {
+		_spawnPosition = position; 
+		this.transform.position = _spawnPosition; 
+		_target = target; 
+		this.transform.rotation = Quaternion.LookRotation (_target - this.transform.position); 
+	}
+
 	public void DeSpawn(){
 		PauseFire (); 
 		_target = Vector3.zero;  
