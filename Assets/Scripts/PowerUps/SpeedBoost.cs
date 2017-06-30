@@ -6,7 +6,7 @@ public class SpeedBoost : PowerUp {
 	// Movement component is used to guarantee the powerup is in possesion of the player
 	// or to guarantee that the player will posses it
 	public string displayName = "Speed Boost";
-    float prevVelocity;
+    float prevSlowness;
     float prevTurnVelocity;
     float prevTilt;
     float prevMultiplier;
@@ -31,11 +31,11 @@ public class SpeedBoost : PowerUp {
 
        
         if(GetComponent<Movement>()) {
-            prevVelocity = GetComponent<Movement>().Velocity;
+            prevSlowness = GetComponent<Movement>().Slowness;
             prevTurnVelocity = GetComponent<Movement>().TurningVelocity;
             prevTilt = GetComponent<Movement>().TiltVelocity;
             prevMultiplier = GetComponent<Movement>().Multiplier;
-            GetComponent<Movement>().Velocity = 400;
+            GetComponent<Movement>().Slowness = 400;
             GetComponent<Movement>().TurningVelocity = 250;
             GetComponent<Movement>().TiltVelocity = 20;
             GetComponent<Movement>().Multiplier = 6;
@@ -85,7 +85,7 @@ public class SpeedBoost : PowerUp {
    
     void DoPowerUp() {
         if((Mathf.Round((dieAt - Time.time) * 10.0f) / 10.0f) < 0.2) {
-            GetComponent<Movement>().Velocity = prevVelocity;
+            GetComponent<Movement>().Slowness = prevSlowness;
             GetComponent<Movement>().TurningVelocity = prevTurnVelocity;
             GetComponent<Movement>().TiltVelocity = prevTilt;
             GetComponent<Movement>().Multiplier = prevMultiplier;
