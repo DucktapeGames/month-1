@@ -6,7 +6,8 @@ using ObjectPooling;
 public class Shooting : MonoBehaviour, IDamageable {
 	private Transform _barrel;
 	private Vector3 _target;
-	private Vector3 mousePos;
+	private Vector3 screenPos, direction, targetPos;
+	public int ScreenDepth, Depth;
 	private Bullet _bullet; 
 	[SerializeField][Range(0,100)]
 	public float FireRate;
@@ -23,10 +24,10 @@ public class Shooting : MonoBehaviour, IDamageable {
 	
 	// Update is called once per frame
 	void Update () {
-		mousePos = Input.mousePosition;
-		mousePos.z += 200.0f;
-		Debug.DrawRay(transform.position, mousePos, Color.green);
-		_target = mousePos;
+		screenPos = Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(ScreenDepth);
+		direction = screenPos - transform.position; 
+		targetPos = transform.position + direction.normalized * Depth;
+		_target = targetPos;
 
 		if(Input.GetMouseButtonDown(0)) {
 			Shoot();
