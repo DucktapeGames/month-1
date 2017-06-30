@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
-	private Rigidbody rbody; 
 	[SerializeField][Range(1,30)]
 	public float Slowness;  
 	[SerializeField][Range(0,1000)]
@@ -21,7 +20,6 @@ public class Movement : MonoBehaviour {
 	void Awake(){
 		RotPositive = false; 
 		Graphics = this.transform.GetChild (0); 
-		rbody = this.GetComponent<Rigidbody> (); 
 		position = this.transform.position; 
 	}
 

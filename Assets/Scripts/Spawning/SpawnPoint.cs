@@ -15,15 +15,17 @@ public class SpawnPoint : MonoBehaviour {
 	void GetPoolReferences(){
 		_enemy = Pool.Instance.AvailableEnemy; 
 	}
-
+		
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			_enemy.Spawn (this.transform.position, _player); 
-			_enemy.Shoot (); 
-		} else if (Input.GetKeyDown (KeyCode.Tab)) {
-			_enemy.DeSpawn (); 
-			_enemy = Pool.Instance.AvailableEnemy; 
+			SpawnNewEnemy (); 
 		}
+	}
+
+	void SpawnNewEnemy(){
+		_enemy.DeSpawn (); 
+		_enemy.Spawn (this.transform.position, _player); 
+		_enemy = Pool.Instance.AvailableEnemy; 
 	}
 
 }

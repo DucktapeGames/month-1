@@ -6,23 +6,22 @@ using ObjectPooling;
 public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 
 	private Vector3 _spawnPosition, _deSpawnPosition, _previousPosition; 
-	private Coroutine _current; 
+	private Coroutine _current, _shootingRoutine;  
 	private Transform _target, _barrel; 
 	private Bullet _bullet; 
+	private Evasion evasionScriptReference; 
 	[SerializeField][Range(0,100)]
 	public float FireRate;
-	[SerializeField][Range(0,100)]
-	public float Speed; 
 
-	private Vector3[] Path; 
 	private MeshRenderer _renderer;
 	private int _totalHp;
 	private int _hp;
 
 	void Start() {
 		_deSpawnPosition = this.transform.position; 
-		_barrel = this.transform.GetChild (2); 
-		_renderer = this.gameObject.GetComponentInChildren<MeshRenderer> ();
+		_barrel = this.transform.GetChild (2);
+		_renderer = this.gameObject.GetComponentInChildren<MeshRenderer>(); 
+		evasionScriptReference = this.gameObject.GetComponent<Evasion>();
 		_totalHp = 100;
 		_hp = 100;
 	}
@@ -31,7 +30,10 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 		_spawnPosition = position; 
 		this.transform.position = _spawnPosition; 
 		_target = target; 
-		this.transform.rotation = Quaternion.LookRotation (_target.position - this.transform.position); 
+		//this.transform.rotation = Quaternion.LookRotation (_target.position - this.transform.position); 
+		evasionScriptReference.StartEvading (); 
+		StartShooting (); 
+
 	}
 
 	public void DeSpawn() {
@@ -40,33 +42,33 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 			_bullet.DeSpawn ();
 		}
 		this.transform.position = _deSpawnPosition; 
-	}
-
-	IEnumerator TraversePath() {
-		_previousPosition = _spawnPosition; 
-		int pathIndex = 0;  
-		float time = 0; 
-		float shootTime = FireRate; 
-		while (pathIndex<Path.Length) {
-			this.transform.position = Vector3.Slerp (_previousPosition,(_spawnPosition + Path [pathIndex]),time + (Speed * Time.fixedDeltaTime));
-			time += (Speed* Time.fixedDeltaTime); 
-			if (shootTime <= FireRate) {
-				shootTime += Time.fixedDeltaTime; 
-			} else {
-				Shoot (); 
-				shootTime = 0; 
-			}
-			if (this.transform.position == (_spawnPosition + Path [pathIndex])) {//when you reach the waypoint go to the next position
-				pathIndex++; 
-			}
-			yield return new WaitForSeconds (Time.fixedDeltaTime); 
-		}
+		evasionScriptReference.StopEvading (); 
+		StopShooting (); 
 	}
 
 	public void Shoot() {
 		_bullet = Pool.Instance.AvailableBullet; 
 		_bullet.Spawn (_barrel.position, _target); 
 		_bullet.Fire (); 
+	}
+
+	void StartShooting(){
+		_shootingRoutine = null; 
+		_shootingRoutine = StartCoroutine (shooting ()); 
+	}
+
+	void StopShooting(){
+		if (_shootingRoutine != null) {
+			StopCoroutine (_shootingRoutine); 
+		}
+	} 
+	IEnumerator shooting(){
+		float randomeDisplacement = Random.Range (0, 3f); 
+		yield return new WaitForSeconds (randomeDisplacement); 
+		while (true) {
+			Shoot (); 
+			yield return new WaitForSeconds (FireRate * Time.fixedDeltaTime); 
+		}
 	}
 
 	public void SetColor(Color color) {
