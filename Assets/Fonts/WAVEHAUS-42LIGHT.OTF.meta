@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 14cd87718590f56438d2f613d3d4cce7
+timeCreated: 1498870071
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Wavehaus
+  fontNames:
+  - Wavehaus
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
