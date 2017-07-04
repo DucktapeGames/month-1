@@ -77,7 +77,6 @@ public class Bullet : MonoBehaviour, IPoolable{
 	}
 
 	void OnTriggerEnter(Collider something) {
-		Debug.Log(something.tag);
 		if(something.tag == "PlayerBody") {
 			something.gameObject.GetComponentInParent<Health>().Damage(damageToPlayer);
 			DeSpawn();
