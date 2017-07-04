@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ObjectPooling;
 
-public class Shooting : MonoBehaviour, IDamageable {
+public class Shooting : MonoBehaviour {
 	private Transform _barrel;
 	private Vector3 _target;
 	private Vector3 screenPos, direction, targetPos;
@@ -13,12 +13,9 @@ public class Shooting : MonoBehaviour, IDamageable {
 	public float FireRate;
 	[SerializeField][Range(0,100)]
 	public float Speed;
-	public int _totalHp;
-	private int _hp;
 
 	// Use this for initialization
 	void Start () {
-		_hp = _totalHp;
 		_barrel = this.transform.GetChild(1);
 	}
 	
@@ -38,38 +35,5 @@ public class Shooting : MonoBehaviour, IDamageable {
 		_bullet = Pool.Instance.AvailableBullet; 
 		_bullet.Spawn2(_barrel.position, _target); 
 		_bullet.Fire();
-	}
-
-	public bool IsEnemy() {
-		return false;
-	}
-
-	public int TotalHp {
-		get {
-			return _totalHp;
-		}
-		set {
-			_totalHp = value;
-		}
-	}
-
-	public int Hp {
-		get {
-			return _hp;
-		}
-		set {
-			_hp = value;
-		}
-	}
-
-	public void Damage(int dmg) {
-		_hp -= dmg;
-		if(_hp <= 0) {
-			Kill();
-		}
-	}
-
-	public void Kill() {
-		// Load game over
 	}
 }

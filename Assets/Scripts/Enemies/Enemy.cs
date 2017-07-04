@@ -16,14 +16,26 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 	private MeshRenderer _renderer;
 	private int _totalHp;
 	private int _hp;
+	public int life;
+	private Score scoreManager;
 
 	void Start() {
 		_deSpawnPosition = this.transform.position; 
 		_barrel = this.transform.GetChild (2);
 		_renderer = this.gameObject.GetComponentInChildren<MeshRenderer>(); 
 		evasionScriptReference = this.gameObject.GetComponent<Evasion>();
-		_totalHp = 100;
-		_hp = 100;
+		_totalHp = life;
+		_hp = life;
+		// This allows enemies to modify score
+		GameObject scoreManagerObject = GameObject.FindWithTag("ScoreManager");
+		if (scoreManagerObject != null)
+        {
+        	scoreManager = scoreManagerObject.GetComponent<Score>();
+        }
+        if (scoreManager == null)
+        {
+            Debug.Log ("Cannot find 'Score' script or Object with tag 'ScoreManager'");
+        }
 	}
 
 	public void Spawn(Vector3 position, Transform target) {
@@ -41,6 +53,7 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 		if (_bullet != null) {
 			_bullet.DeSpawn ();
 		}
+		scoreManager.AddScore(10);
 		this.transform.position = _deSpawnPosition; 
 		evasionScriptReference.StopEvading (); 
 		StopShooting (); 
@@ -52,7 +65,7 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 		_bullet.Fire (); 
 	}
 
-	void StartShooting(){
+	void StartShooting() {
 		_shootingRoutine = null; 
 		_shootingRoutine = StartCoroutine (shooting ()); 
 	}

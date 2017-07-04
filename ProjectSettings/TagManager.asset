@@ -7,6 +7,8 @@ TagManager:
   - Bullet
   - Enemy
   - Pool
+  - ScoreManager
+  - PlayerBody
   layers:
   - Default
   - TransparentFX

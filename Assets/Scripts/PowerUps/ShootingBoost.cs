@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShootingBoost : PowerUp {
-	// Health component is used to guarantee the powerup is in possesion of the player
+	// Shooting component is used to guarantee the powerup is in possesion of the player
 	// or to guarantee that the player will posses it
 	public string displayName = "Shooting Boost";
    
     // Use this for initialization
     void Start() {
         // Guarantee existance in player or in game
-        if(!GetComponent<Health>()) {
+        if(!GetComponent<Shooting>()) {
             SphereCollider col = GetComponent<SphereCollider>();
             if(!GetComponent<Collider>()) {
                 col = gameObject.AddComponent<SphereCollider>();
@@ -24,7 +24,7 @@ public class ShootingBoost : PowerUp {
     public override void Init() {
         toolTip = displayName;
        
-        if(GetComponent<Health>()) {
+        if(GetComponent<Shooting>()) {
             // Make this the current active powerup
             PowerUp[] pups = (PowerUp[])GetComponents<PowerUp>();
 
@@ -37,7 +37,7 @@ public class ShootingBoost : PowerUp {
    
     // Update is called once per frame
     void Update () {
-        if(!GetComponent<Health>()) {
+        if(!GetComponent<Shooting>()) {
             // do animation effects here.
             return;
         }
@@ -58,7 +58,7 @@ public class ShootingBoost : PowerUp {
         GameObject go = other.gameObject;
 
 		// Guarantee player found
-        if(go.GetComponent<Health>()) {
+        if(go.GetComponent<Shooting>()) {
 			// If plyaer already has an active shooting boost
             if(go.GetComponent<ShootingBoost>()) {
                 Destroy(go.GetComponent<ShootingBoost>());

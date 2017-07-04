@@ -12,6 +12,10 @@ public class Bullet : MonoBehaviour, IPoolable{
 	public float Speed; 
 	[SerializeField][Range(0,10)]
 	public float LifeTime;
+	// Damage that is going to be done to player when hit
+	public int damageToPlayer;
+	// Damage that is going to be done to player when hit
+	public int damageToEnemy;
 
 	void Start() {
 		_deSpawnPosition = this.transform.position;
@@ -37,7 +41,7 @@ public class Bullet : MonoBehaviour, IPoolable{
 	}
 
 	public void DeSpawn() {
-		PauseFire (); 
+		PauseFire(); 
 		_target = Vector3.zero;  
 		this.transform.position = _deSpawnPosition; 
 	}
@@ -46,7 +50,7 @@ public class Bullet : MonoBehaviour, IPoolable{
 		_current = null; 
 		_current = StartCoroutine (ShootTowardsPlayer ()); 
 	}
-	public void PauseFire(){
+	public void PauseFire() {
 		if (_current != null) {
 			StopCoroutine (_current); 
 		}
@@ -73,11 +77,13 @@ public class Bullet : MonoBehaviour, IPoolable{
 	}
 
 	void OnTriggerEnter(Collider something) {
-		if(something.tag == "Player" && _enemyBullet) {
-			DeSpawn(); 
+		Debug.Log(something.tag);
+		if(something.tag == "PlayerBody") {
+			something.gameObject.GetComponentInParent<Health>().Damage(damageToPlayer);
+			DeSpawn();
 		}
 		if(something.tag == "Enemy" && !_enemyBullet) {
-			something.gameObject.GetComponent<Enemy>().DeSpawn();
+			something.gameObject.GetComponent<Enemy>().Damage(damageToEnemy);
 			DeSpawn();
 		}
 	}
