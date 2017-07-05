@@ -58,6 +58,16 @@ public class Health : MonoBehaviour, IDamageable {
 	}
 
 	public void UpdateLife() {
-		lifeText.text = "HP " + Hp + "/" + TotalHp;
+		lifeText.text = "HP: " + Hp;
+	}
+
+	public void Heal(int qty) {
+		if(_hp + qty >= life) {
+			_hp = life;
+		}
+		else {
+			_hp += qty;
+		}
+		UpdateLife();
 	}
 }

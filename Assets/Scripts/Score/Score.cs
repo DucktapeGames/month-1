@@ -18,6 +18,6 @@ public class Score : MonoBehaviour {
 	}
 
 	void UpdateScore() {
-		scoreText.text = "Score: " + score;
+		scoreText.text = "" + score;
 	}
 }
