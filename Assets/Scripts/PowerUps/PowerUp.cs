@@ -63,7 +63,7 @@ public class PowerUp : MonoBehaviour {
 
         GUIContent content = new GUIContent(icon, toolTip);
         
-        Rect rect = new Rect(iconPosition.x, iconPosition.y, icon.width, icon.height);
+        Rect rect = new Rect(iconPosition.x, iconPosition.y, 50, 50);
         GUI.Box(rect, content);
         s = ""; // uses or seconds remaining
 
