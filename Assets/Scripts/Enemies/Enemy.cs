@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 	private Coroutine _current, _shootingRoutine;  
 	private Transform _target, _barrel; 
 	private Bullet _bullet; 
-	private Evasion evasionScriptReference; 
 	[SerializeField][Range(0,100)]
 	public float FireRate;
 
@@ -23,7 +22,6 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 		_deSpawnPosition = this.transform.position; 
 		_barrel = this.transform.GetChild (2);
 		_renderer = this.gameObject.GetComponentInChildren<MeshRenderer>(); 
-		evasionScriptReference = this.gameObject.GetComponent<Evasion>();
 		_totalHp = life;
 		_hp = life;
 		// This allows enemies to modify score
@@ -42,8 +40,7 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 		_spawnPosition = position; 
 		this.transform.position = _spawnPosition; 
 		_target = target; 
-		//this.transform.rotation = Quaternion.LookRotation (_target.position - this.transform.position); 
-		evasionScriptReference.StartEvading (); 
+		//this.transform.rotation = Quaternion.LookRotation (_target.position - this.transform.position);  
 		StartShooting (); 
 
 	}
@@ -55,7 +52,6 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 		}
 		scoreManager.AddScore(10);
 		this.transform.position = _deSpawnPosition; 
-		evasionScriptReference.StopEvading (); 
 		StopShooting (); 
 	}
 
