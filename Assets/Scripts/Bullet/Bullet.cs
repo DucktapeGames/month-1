@@ -71,7 +71,7 @@ public class Bullet : MonoBehaviour, IPoolable{
 
 	public void SetColor(Color color) {
 		if (_renderer == null) {
-			_renderer = GetComponent<Renderer>(); 
+			_renderer = GetComponentInChildren<Renderer>(); 
 		}
 		_renderer.material.SetColor("_Color", color);
 	}
