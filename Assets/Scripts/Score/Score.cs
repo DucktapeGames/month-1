@@ -9,11 +9,13 @@ public class Score : MonoBehaviour {
 	public static int score;
 	void Start () {
 		score = 0;
+		PublicScore.SCORE = score;
 		UpdateScore();
 	}
 	
 	public void AddScore(int value) {
 		score += value;
+		PublicScore.SCORE = score;
 		UpdateScore();
 	}
 
