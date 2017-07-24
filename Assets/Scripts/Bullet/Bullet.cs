@@ -82,7 +82,7 @@ public class Bullet : MonoBehaviour, IPoolable{
 			DeSpawn();
 		}
 		if(something.tag == "Enemy" && !_enemyBullet) {
-			something.gameObject.GetComponent<Enemy>().Damage(damageToEnemy);
+			something.gameObject.GetComponentInParent<Enemy>().Damage(damageToEnemy);
 			DeSpawn();
 		}
 	}
