@@ -16,13 +16,7 @@ public class SpawnPoint : MonoBehaviour {
 		_enemy = Pool.Instance.AvailableEnemy; 
 	}
 		
-	void Update(){
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			SpawnNewEnemy (); 
-		}
-	}
-
-	void SpawnNewEnemy(){
+	public void SpawnNewEnemy(){
 		_enemy.DeSpawn (); 
 		_enemy.Spawn (this.transform.position, _player); 
 		_enemy = Pool.Instance.AvailableEnemy; 

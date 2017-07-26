@@ -371,6 +371,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7713788d5ec1f4c45b22f1e3caa06243, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &666676713 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114085394773738652, guid: 7713788d5ec1f4c45b22f1e3caa06243,
+    type: 2}
+  m_PrefabInternal: {fileID: 613446905}
+  m_Script: {fileID: 11500000, guid: ba079957b3f514f2a92fc853033a92ce, type: 3}
 --- !u!1 &755486099
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +938,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1350416768}
+--- !u!114 &1402375843 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114085394773738652, guid: 7713788d5ec1f4c45b22f1e3caa06243,
+    type: 2}
+  m_PrefabInternal: {fileID: 198460056}
+  m_Script: {fileID: 11500000, guid: ba079957b3f514f2a92fc853033a92ce, type: 3}
 --- !u!1 &1404485400
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1152,64 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9fde2c5e630354782bf0ed9fafcd5f15, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1489476064 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114085394773738652, guid: 7713788d5ec1f4c45b22f1e3caa06243,
+    type: 2}
+  m_PrefabInternal: {fileID: 564417518}
+  m_Script: {fileID: 11500000, guid: ba079957b3f514f2a92fc853033a92ce, type: 3}
+--- !u!1 &1695923425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1695923426}
+  - component: {fileID: 1695923427}
+  m_Layer: 0
+  m_Name: Level Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1695923426
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1695923425}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1695923427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1695923425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c4b9b10b9794d689956cb2d51d7043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TopLeft: {fileID: 1489476064}
+  BottomLeft: {fileID: 666676713}
+  TopMiddle: {fileID: 1753798855}
+  BottomMiddle: {fileID: 1402375843}
+  TopRight: {fileID: 1851290423}
+  BottomRight: {fileID: 1851290423}
+--- !u!114 &1753798855 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114085394773738652, guid: 7713788d5ec1f4c45b22f1e3caa06243,
+    type: 2}
+  m_PrefabInternal: {fileID: 799666755}
+  m_Script: {fileID: 11500000, guid: ba079957b3f514f2a92fc853033a92ce, type: 3}
 --- !u!1001 &1817809375
 Prefab:
   m_ObjectHideFlags: 0
@@ -1255,6 +1325,12 @@ SpriteRenderer:
   m_Size: {x: 8.36, y: 8.36}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+--- !u!114 &1851290423 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114085394773738652, guid: 7713788d5ec1f4c45b22f1e3caa06243,
+    type: 2}
+  m_PrefabInternal: {fileID: 537440526}
+  m_Script: {fileID: 11500000, guid: ba079957b3f514f2a92fc853033a92ce, type: 3}
 --- !u!1 &1927080980
 GameObject:
   m_ObjectHideFlags: 0
