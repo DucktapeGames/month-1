@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour, IPoolable{
 
 	public void Spawn2(Vector3 position, Vector3 target) {
 		_enemyBullet = false;
-		SetColor(Color.green);
+		SetColor(Color.white);
 		_spawnPosition = position; 
 		this.transform.position = _spawnPosition; 
 		_target = target; 
@@ -71,14 +71,16 @@ public class Bullet : MonoBehaviour, IPoolable{
 
 	public void SetColor(Color color) {
 		if (_renderer == null) {
-			_renderer = GetComponentInChildren<Renderer>(); 
+			_renderer = this.gameObject.GetComponentInChildren<Renderer>(); 
 		}
-		_renderer.material.SetColor("_Color", color);
+		_renderer.material.EnableKeyword("_EMISSION");
+		_renderer.material.color = color; 
+		_renderer.material.SetColor("_EmissionColor",color);
 	}
 
 	void OnTriggerEnter(Collider something) {
 		if(something.tag == "PlayerBody") {
-			something.gameObject.GetComponentInParent<Health>().Damage(damageToPlayer);
+			something.gameObject.GetComponent<Health>().Damage(damageToPlayer);
 			DeSpawn();
 		}
 		if(something.tag == "Enemy" && !_enemyBullet) {

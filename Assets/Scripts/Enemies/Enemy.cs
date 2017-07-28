@@ -12,18 +12,20 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 	[SerializeField][Range(0,100)]
 	public float FireRate;
 
-	private MeshRenderer _renderer;
 	private int _totalHp;
 	private int _hp;
 	public int life;
 	private Score scoreManager;
+	private Animator anim; 
+
 
 	void Start() {
 		_deSpawnPosition = this.transform.position; 
 		_barrel = this.transform.GetChild (2);
-		_renderer = this.gameObject.GetComponentInChildren<MeshRenderer>(); 
 		_totalHp = life;
-		_hp = life;
+		_hp = 0;
+		anim = this.gameObject.GetComponentInChildren<Animator> (); 
+		anim.speed = 0; 
 		// This allows enemies to modify score
 		GameObject scoreManagerObject = GameObject.FindWithTag("ScoreManager");
 		if (scoreManagerObject != null)
@@ -38,9 +40,11 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 
 	public void Spawn(Vector3 position, Transform target) {
 		_spawnPosition = position; 
+		_hp = life; 
 		this.transform.position = _spawnPosition; 
 		_target = target; 
-		//this.transform.rotation = Quaternion.LookRotation (_target.position - this.transform.position);  
+		anim.speed = 1; 
+		this.transform.rotation = Quaternion.LookRotation (this.transform.position - _target.position);  
 		StartShooting (); 
 
 	}
@@ -50,9 +54,10 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 		if (_bullet != null) {
 			_bullet.DeSpawn ();
 		}
-		scoreManager.AddScore(10);
 		this.transform.position = _deSpawnPosition; 
-		StopShooting (); 
+		StopShooting ();
+		anim.speed = 0; 
+
 	}
 
 	public void Shoot() {
@@ -78,13 +83,6 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 			Shoot (); 
 			yield return new WaitForSeconds (FireRate * Time.fixedDeltaTime); 
 		}
-	}
-
-	public void SetColor(Color color) {
-		if (_renderer == null) {
-			_renderer = this.gameObject.GetComponentInChildren<MeshRenderer> (); 
-		}
-		_renderer.material.color = color; 
 	}
 
 	public bool IsEnemy() {
@@ -117,6 +115,7 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 	}
 
 	public void Kill() {
+		scoreManager.AddScore(10);
 		DeSpawn();
 	}
 }

@@ -14,7 +14,7 @@ public class Crosshair : MonoBehaviour {
 	public bool IsFirst; 
 
 	void Awake(){
-		player = GameObject.FindGameObjectWithTag ("Player").transform; 
+		player = GameObject.FindGameObjectWithTag ("PlayerBody").transform; 
 	}
 
 	void Update(){

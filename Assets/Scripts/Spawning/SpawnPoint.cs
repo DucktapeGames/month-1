@@ -6,9 +6,22 @@ public class SpawnPoint : MonoBehaviour {
 
 	private Enemy _enemy; 
 	private Transform _player; 
+	public bool IsEnemyAlive{
+		get{
+			if (_enemy != null) {
+				if (_enemy.life > 0) {
+					return true; 
+				} else {
+					return false; 
+				}
+			} else {
+				return false; 
+			}
+		}
+	}
 
 	void Awake(){
-		_player = GameObject.FindGameObjectWithTag ("Player").transform;
+		_player = GameObject.FindGameObjectWithTag ("PlayerBody").transform;
 		Pool.ready += GetPoolReferences; 
 	}
 

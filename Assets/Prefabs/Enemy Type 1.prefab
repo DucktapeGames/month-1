@@ -251,5 +251,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba46c0ffbfac440e3a01977a198ed04c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireRate: 40
-  life: 50
+  FireRate: 30
+  life: 100

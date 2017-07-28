@@ -46,7 +46,6 @@ public class Pool : MonoBehaviour {
 		}
 		for (int n = 1; n <= EnemyCount; n++) {
 			eAux = Instantiate (EnemyPrefab, this.transform.position + (n * 2* -this.transform.forward), Quaternion.identity, this.transform);
-			eAux.SetColor (new Color (Random.value, Random.value, Random.value)); 
 			enemies.Enqueue (eAux); 
 		}
 
