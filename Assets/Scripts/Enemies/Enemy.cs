@@ -14,6 +14,11 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 
 	private int _totalHp;
 	private int _hp;
+	public int HP{
+		get{
+			return _hp; 
+		}
+	}
 	public int life;
 	private Score scoreManager;
 	private Animator anim; 
@@ -50,7 +55,8 @@ public class Enemy : MonoBehaviour, IPoolable, IDamageable {
 	}
 
 	public void DeSpawn() {
-		_target = null;  
+		_target = null; 
+		_hp = 0; 
 		if (_bullet != null) {
 			_bullet.DeSpawn ();
 		}

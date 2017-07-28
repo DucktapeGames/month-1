@@ -5,11 +5,12 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour {
 
 	private Enemy _enemy; 
+	private Enemy _previouseEnemy; 
 	private Transform _player; 
 	public bool IsEnemyAlive{
 		get{
-			if (_enemy != null) {
-				if (_enemy.life > 0) {
+			if (_previouseEnemy != null) {
+				if (_previouseEnemy.HP > 0) {
 					return true; 
 				} else {
 					return false; 
@@ -30,6 +31,7 @@ public class SpawnPoint : MonoBehaviour {
 	}
 		
 	public void SpawnNewEnemy(){
+		_previouseEnemy = _enemy; 
 		_enemy.DeSpawn (); 
 		_enemy.Spawn (this.transform.position, _player); 
 		_enemy = Pool.Instance.AvailableEnemy; 

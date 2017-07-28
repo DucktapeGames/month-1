@@ -9,14 +9,8 @@ public class Level1 : MonoBehaviour {
 	private Coroutine current; 
 
 	void Start(){
-		StartSequence1 (); 
 		Cursor.visible = false; 
-	}
-
-	void Update(){
-		if (!TopLeft.IsEnemyAlive && !TopMiddle.IsEnemyAlive && !TopRight.IsEnemyAlive) {
-			StartSequence2 (); 
-		}
+		StartSequence1 (); 
 	}
 
 	IEnumerator SpawnSequence1(){
@@ -26,28 +20,45 @@ public class Level1 : MonoBehaviour {
 		TopMiddle.SpawnNewEnemy (); 
 		yield return new WaitForSeconds (2f);
 		TopRight.SpawnNewEnemy (); 
+		while(!IsEveryoneDead()){
+			yield return new WaitForSeconds (2f); 
+		}
+		StartSequence2 (); 
 	}
 	IEnumerator SpawnSequence2(){
 		yield return new WaitForSeconds (2f);
 		BottomLeft.SpawnNewEnemy (); 
 		yield return new WaitForSeconds (2f);
-		BottomLeft.SpawnNewEnemy (); 
+		BottomMiddle.SpawnNewEnemy (); 
 		yield return new WaitForSeconds (2f);
 		BottomRight.SpawnNewEnemy (); 
+		while(!IsEveryoneDead()){
+			yield return new WaitForSeconds (2f); 
+		}
+		StartSequence3 ();
 	}
 	IEnumerator SpawnSequence3(){
 		yield return new WaitForSeconds (2f);
 		TopLeft.SpawnNewEnemy (); 
 		yield return new WaitForSeconds (2f);
-		BottomLeft.SpawnNewEnemy (); 
+		BottomMiddle.SpawnNewEnemy (); 
 		yield return new WaitForSeconds (2f);
 		TopRight.SpawnNewEnemy (); 
 	}
 
 
-
-
-
+	bool IsEveryoneDead(){
+		if (!TopLeft.IsEnemyAlive &&
+		    !BottomLeft.IsEnemyAlive &&
+		    !TopMiddle.IsEnemyAlive &&
+		    !BottomMiddle.IsEnemyAlive &&
+		    !TopRight.IsEnemyAlive &&
+		    !BottomRight.IsEnemyAlive) {
+			return true; 
+		} else {
+			return false; 
+		}
+	}
 
 //________________________________ Lots of the same stuff _____________________________//
 
@@ -66,6 +77,16 @@ public class Level1 : MonoBehaviour {
 		current = StartCoroutine (SpawnSequence2());
 	}
 	void StopSequence2(){
+		if (current != null) {
+			StopCoroutine (current); 
+		}
+		current = null; 
+	}
+	void StartSequence3(){
+		current = null; 
+		current = StartCoroutine (SpawnSequence3());
+	}
+	void StopSequence3(){
 		if (current != null) {
 			StopCoroutine (current); 
 		}
